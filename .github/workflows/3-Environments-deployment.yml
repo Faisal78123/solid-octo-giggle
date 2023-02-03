@@ -1,0 +1,27 @@
+name: 3-Environments-deployment
+on:
+  workflow_dispatch:
+jobs:
+  DEV:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Run a script
+        run: |
+          echo "I am running a job in the DEV environment"
+  QA:
+    runs-on: ubuntu-latest
+    environment: qa
+    needs: DEV
+    steps:
+      - name: Run a script
+        run: |
+          echo "I am running a job in the QA environment"
+  PROD:
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: QA
+    steps:
+      - name: Run a script
+        run: |
+          echo "I am running a job in the PROD environment"
